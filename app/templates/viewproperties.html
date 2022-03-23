@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} View Property {% endblock %}
+
+{% block main %}
+{% if prop != null %}
+    <div class="singlepropertyimage">
+        <div class = "singleimg">
+            <img src="{{ url_for('getimage', filename = prop.upload) }}"/>
+        </div>
+        <div class="singleinfo">
+            <span class="singletitle"><h3>{{ prop.title}}</h3></span>
+            <span class="singlecdate"><b>Property Added On: </b>{{ prop.datecreated }}</span>
+            <div class="singlegroup">
+                <span class="singleprice"> ${{ prop.price}}</span>
+                <span class="singletype">{{ prop.propertyType}}</span>
+            </div>
+            <span class="singledesc"><b>Description: </b>{{ prop.description }}</span>
+            <div class="singlegroup2">
+                <div>
+                    <span class="singlroom"><i class="glyphicon glyphicon-bed"></i> {{ prop.numberBeds}} Bedrooms</span>
+                </div>
+                <div>
+                    </i><span class="singlbroom"><i class="glyphicon glyphicon-tint"></i> {{ prop.numberRooms}} Bathrooms</span>
+                </div>
+            </div>
+            <span class="singleloc"><i class="glyphicon glyphicon-map-marker"></i> {{prop.location}}</span><br/>
+            <div class="emdiv">
+                <button class="embut">Email Realtor</button>
+            </div>
+            
+        </div>
+    </div>
+        <br/>
+{% else %}
+    <div class ="singlepropertyimagemessage">
+        <p>Property Not Selected. Please select a property to start viewing</p>
+    </div>
+
+{% endif %}
+
+{% endblock %}

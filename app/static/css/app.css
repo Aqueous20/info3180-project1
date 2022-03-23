@@ -1,3 +1,261 @@
 body {
+    padding-top: 50px;
+    background-color: rgb(242, 242, 242);
+}
+
+.required{
+    color: rgb(255, 0, 0);
+    font-size: 15px;
+}
+
+.submitted{
+    background-color: rgb(39, 255, 190);
+    color: white;
+    border-radius: 10px;
+}
+
+.flashes{
+    display: grid;
+    padding-top: 20px;
+    color:rgb(4, 255, 0);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
+
+.container{
+    padding: 10px;
+}
+
+form{
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.head {
+    padding-top: 20px;
+    width: 75%;
+    margin: auto;
+    text-align: center;
+}
+.grid-container {
+    width: 70%;
+    padding: 50px;
+    background-color: white;
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(70px, auto);
+    grid-template-areas: "a1 a1 a1 a1 a1"
+                         "b2 b2 b2 b2 b2"
+                         "b2 b2 b2 b2 b2"
+                         "c3 c3 . d4 d4"
+                         "e5 e5 . f6 f6"
+                         "g7 g7 . . ."
+                         "h8 h8 . . .";
+  }
+
+.a1{
+    grid-area: a1;
+}
+
+.b2{
+    grid-area: b2;
+}
+
+.c3{
+    grid-area: c3;
+}
+
+.d4{
+    grid-area: d4;
+}
+
+.e5{
+    grid-area: e5;
+}
+
+.f6{
+    grid-area: f6;
+}
+
+.g7{
+    grid-area: g7;
+}
+
+.h8{
+    grid-area: h8;
+}
+
+
+
+.grid-container input{
+    width: 100%;
+}
+
+.b input{
+    height: 75%;
+}
+
+.btn btn-primary{
+    width: 100%;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+/*All Properties for properties.html*/
+.pimage{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.gr{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.pimage img {
+    width: 100%; 
+    height: 100%;
+}
+
+.pimage div {
+    padding: 5px;
+}
+
+.pimagemessage{
+    padding-top: 20px;
+    color: red;
+}
+
+.info{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    font-size: 16px;
+    align-items: center;
+    max-height: 80%;
+
+}
+
+.title{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cdate{
+    display: block;
+    text-align: center;
+}
+
+.loc{
+    display: block;
+    text-align: center;
+}
+
+.price{
+    overflow:hidden;
+    max-width: 100%;
+    text-align: center;
+}
+
+.price span{
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+}
+
+.view{
+    padding: 10px;
+    display: block;
+    text-align: center;
+    background-color: rgb(0, 168, 126);
+    color: white;
+    
+}
+
+/*Individual Property for viewproperty.html*/
+
+.singlepropertyimage{
+    padding-top: 3%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%; 
+    max-height: 100%;
+    
+}
+
+.singlepropertyimage img {
+    max-width: 100%; 
+    max-height: 100%;
+    object-fit: fill;
+}
+
+.singleinfo{
+    background-color: white;
+    padding: 0% 10% 0% 10%;
+    max-width: 100%; 
+    max-height: 100%;
+    font-size: 16px;
+}
+
+
+
+.singlegroup{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:10px 0 10px 0;
+}
+
+.singledesc{
+    padding:10px 0 10px 0;
+    margin:auto;
+}
+
+.singleprice {
+    width: 50%;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+    text-align: center;
+}
+
+.singletype {
+    width: 50%;
+    padding: 5px;
+    background-color: #ffa600;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+    text-align: center;
+}
+
+.singlegroup2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:10px 0 10px 0;
+}
+
+.emdiv{
+    padding-top: 10px;
+}
+
+.embut{
+    width: 30%;
+    padding: 5px;
+    background-color: #0a792f;
+    color: white;
+    font-size: 80%;
+    text-align: center;
+    
+}
+body {
     padding-top: 5rem;
 }

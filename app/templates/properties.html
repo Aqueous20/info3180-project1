@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} View All Properties {% endblock %}
+
+{% block main %}
+<h1>Properties</h1>
+{% if properties|length > 0 %}
+    <div class="pimage">
+        {% for prop in properties %}
+        <div class="gr">
+            <div class = "img">
+                <img src="{{ url_for('getimage', filename = prop.upload) }}"/>
+            </div>
+
+            <div class="info">
+                <span class="title">{{ prop.title}}</span>
+                <span class="cdate"><b>Property Added On: </b>{{ prop.datecreated }}</span>
+                <span class="loc"><i class="glyphicon glyphicon-map-marker"></i> {{prop.location}}</span>
+                <div class="price">
+                    <span> ${{ prop.price}}</span> <br/>
+                </div>
+                <br/>
+                <a href="{{ url_for('getproperty', propid = prop.id) }}">
+                    <span class="view">View Property</span>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        <br/>
+    </div>
+{% else %}
+    <div class ="pimagemessage">
+        <h4>No Properties Available. Please upload a property to start viewing THANK YOU</h4>
+    </div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1 class= "heading"> Add New Property</h1>
+<section class="contact-clean">
+    <form method="POST" action="{{ url_for('property') }}">
+        
+        {{ form.csrf_token }}
+        <div class = "grid-container">
+            <div class="a1">
+                {{form.title.label}}
+                <br/>
+                {{ form.title }}
+            </div>
+            <div class="b2">
+                {{form.description.label}}
+                <br/>
+                {{ form.description(class='form-control')}}
+            </div>
+            <div class="c3">
+                {{form.bedroomNum.label }} 
+                <br/>
+                {{ form.bedroomNum}}
+            </div>
+            <div class="d4">
+                {{form.bathRoomNum.label }} 
+                <br/>
+                {{form.bathRoomNum}}
+            </div>
+            <div class="e5">
+                {{form.price.label }} 
+                <br/> 
+                {{ form.price }}
+            </div>
+            <div class="f6">
+                {{form.propertyType.label }} 
+                <br/> 
+                {{ form.propertyType}}
+            </div>
+            <div class="g7">
+                {{form.location.label }} 
+                <br/> 
+                {{ form.location }}
+            </div>
+            <div class="h8">
+                {{form.photo.label }} 
+                <br/> 
+                {{ form.photo(size=40)}}
+                <br/> <br/>
+                <button type="submit" name="submit" class="btn btn-primary">Add Property</button>
+            </div>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
+

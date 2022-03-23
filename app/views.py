@@ -5,8 +5,19 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file creates your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
+from app import app,db
+from flask import render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename
+from flask import send_from_directory,jsonify, make_response
+from app.Form import PropertyForm
+from app.models import UserProperty
+import os, random, datetime, psycopg2 
+from werkzeug.datastructures import CombinedMultiDict
+
+
+psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
+
+
 
 
 ###
@@ -22,8 +33,80 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Corey Anderson")
 
+@app.route('/property/create', methods=['POST', 'GET'])
+def property():
+    """Render the website's property form page"""
+    form = PropertyForm()
+    files = PropertyForm(CombinedMultiDict((request.files, request.form)))
+    if request.method == "POST" and form.validate_on_submit():
+            title=form.title.data
+            description=form.description.data
+            numberBeds=form.bedroomNum.data
+            numberRooms=form.bathRoomNum.data
+            price=form.price.data
+            propertyType=form.propertyType.data
+            location=form.location.data
+            picture=form.photo.data
+
+            # Handling Database Procedure
+            filename = secure_filename(picture.filename)
+            picture.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            UserProperty= UserProperty(propid, title, description, numberBeds, numberRooms, price, propertyType, location, filename, datecreated)
+            propid = genId(title, filename) 
+            datecreated = datetime.date.today()
+            db.session.add(UserProperty)
+            db.session.commit()
+            flash("Property successfully listed", category="success")
+
+            return redirect(url_for('properties'))
+    return render_template("property.html", form = form)
+
+@app.route('/propeties/', methods=["GET", "POST"])
+def properties():
+    """Render the websites property listing page""" 
+    properties = UserProperty.query.all()
+    
+    if request.method == "POST":
+        response = make_response(jsonify(properties)) 
+        response.headers['Content-Type'] = 'application/json'
+        return response 
+    elif request.method == "GET":
+        return render_template('properties.html', properties = properties) 
+
+@app.route('/property/<propid>', methods=["GET", "POST"]) 
+def getproperty(propid):
+
+    prop = UserProperty.query.filter_by(id=propid).first()
+    
+    if request.method == "POST":
+        if prop is not None:
+            response = make_response(jsonify(id = prop.propid, title = prop.title, num_bedrooms = prop.num_bedrooms, num_bathrooms = prop.num_bathrooms, location = prop.location, price = prop.price, type_ = prop.type_, description = prop.description, upload = prop.filename, date_created = prop.date_created)) 
+            response.headers['Content-Type'] = 'application/json'
+            return response
+        else:
+            flash('Property Not Found', 'danger')
+            return redirect(url_for("home"))
+    elif request.method == "GET":
+        return render_template("viewproperties.html", prop=prop)
+
+    
+
+def genId(title, filename):
+    id = []
+    for x in title:
+        id.append(str(ord(x))) 
+    for x in filename:
+        id.append(str(ord(x))) 
+    random.shuffle(id) 
+    res= ''.join(id) 
+    return int(res[:5]) 
+
+@app.route("/uploads/<filename>") 
+def getimage(filename):
+    rootdir = os.getcwd()
+    return send_from_directory(rootdir + "/" + app.config['UPLOAD_FOLDER'], filename)   
 
 ###
 # The functions below should be applicable to all Flask apps.
